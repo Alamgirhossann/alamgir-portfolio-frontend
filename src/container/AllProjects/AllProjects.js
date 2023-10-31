@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { urlFor, client } from "../../client";
-import "./Work.scss";
+import "../Work/Work.scss";
 import { Link } from "react-router-dom";
+import { Navbar } from "../../components";
+import FooterCompo from "../FooterCompo/FooterCompo";
 
-const Work = () => {
+const AllProjects = () => {
   const [works, setWorks] = useState([]);
   const [filterWork, setFilterWork] = useState([]);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -39,10 +41,35 @@ const Work = () => {
   };
 
   return (
-    <>
-      <h2 className="head-text">
-        My <span>Projects</span> Section
+    <div
+      style={{
+        background: "#edf2fa",
+        fontFamily: "sans-serif",
+      }}
+    >
+      <Navbar />
+
+      <h2 className="head-text" style={{ paddingTop: "100px" }}>
+        My All <span>Projects</span>
       </h2>
+
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="app__work-filter">
+          {["All", "Reactjs", "UI/UX", "Typescript", "Redux", "Nextjs"].map(
+            (item, index) => (
+              <div
+                key={index}
+                onClick={() => handleWorkFilter(item)}
+                className={`app__work-filter-item app__flex p-text ${
+                  activeFilter === item ? "item-active" : ""
+                }`}
+              >
+                {item}
+              </div>
+            )
+          )}
+        </div>
+      </div>
 
       <motion.div
         animate={animateCard}
@@ -50,7 +77,7 @@ const Work = () => {
         className="app__work-portfolio"
       >
         {!works.length && <p>Loading...</p>}
-        {filterWork.slice(7, 10).map((work, index) => (
+        {filterWork.map((work, index) => (
           <div className="app__work-item app__flex" key={index}>
             <div className="app__work-img app__flex">
               <img src={urlFor(work.imgUrl)} alt={work.name} />
@@ -70,10 +97,9 @@ const Work = () => {
               <h4 className="bold-text">{work.title}</h4>
               {
                 <p className="p-text" style={{ marginTop: 10 }}>
-                  {work.shortDescription}
+                  {work?.shortDescription}
                 </p>
               }
-
               <Link to={`/productDetail/${work._id}`}>
                 <button
                   style={{
@@ -98,27 +124,17 @@ const Work = () => {
           </div>
         ))}
       </motion.div>
-      <Link to="/allProjects">
-        <button
-          style={{
-            background: "#313bac",
-            padding: "10px 15px",
-            color: "white",
-            outline: "none",
-            border: "none",
-            borderRadius: "20px",
-            cursor: "pointer",
-          }}
-        >
-          See More
-        </button>
-      </Link>
-    </>
+      <div style={{ background: "white" }}>
+        <FooterCompo />
+      </div>
+    </div>
   );
 };
 
-export default AppWrap(
-  MotionWrap(Work, "app__works"),
-  "work",
-  "app__primarybg"
-);
+// export default AppWrap(
+//   MotionWrap(AllProjects, "app__works"),
+//   "work",
+//   "app__primarybg"
+// );
+
+export default AllProjects;
