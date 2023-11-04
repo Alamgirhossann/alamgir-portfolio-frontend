@@ -30,7 +30,10 @@ const Testimonial = () => {
 
   return (
     <>
-      <h2 className="head-text" style={{ marginBottom: "50px" }}>
+      <h2
+        className="head-text"
+        style={{ marginBottom: "50px", marginTop: "25px" }}
+      >
         Testimonials
       </h2>
       {!testimonials.length && <p>Loading...</p>}

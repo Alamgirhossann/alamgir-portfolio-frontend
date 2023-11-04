@@ -13,9 +13,7 @@ export default function MainLayout() {
         <Skills />
         <Work />
         <Testimonial />
-        {
-          // <About />
-        }
+        {<About />}
 
         <Footer />
         <FooterCompo />

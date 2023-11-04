@@ -40,7 +40,7 @@ const Work = () => {
 
   return (
     <>
-      <h2 className="head-text">
+      <h2 className="head-text" style={{ marginBottom: "40px" }}>
         My <span>Projects</span> Section
       </h2>
 
